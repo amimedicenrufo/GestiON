@@ -22,7 +22,7 @@ export default function Header() {
               <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
                 <Pencil size={20} className="text-white" />
               </div>
-              <span className="font-bold text-xl">gestON</span>
+              <span className="font-bold text-xl">gestiON</span>
             </Link>
           </div>
 
