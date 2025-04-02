@@ -18,10 +18,12 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto h-full flex flex-col justify-center items-center text-center px-4">
-        <p className="text-blue-400 font-medium tracking-wider mb-2">
-          ASISTENTE DE TRÁMITES GUBERNAMENTALES
-        </p>
+      <div className="relative z-50 container mx-auto mb-10  p-2 h-full rounded-lg flex flex-col justify-center items-center text-center px-10">
+        <div className="inline-block mb-10">
+          <span className="text-blue-600 font-bold bg-black/20 rounded-lg tracking-wider text-lg px-4 py-2 border-b-2 border-blue-400 [text-shadow:_0_1px_3px_rgb(0_0_0_/_50%)]">
+            ASISTENTE DE TRÁMITES GUBERNAMENTALES
+          </span>
+        </div>
 
         <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
           Simplificamos Trámites <br />
@@ -36,7 +38,7 @@ export default function Hero() {
         {/* Botón mejorado - más grande y llamativo */}
         <Link
           href="/servicios"
-          className="bg-blue-600 hover:bg-blue-500 text-white text-xl md:text-2xl font-bold px-8 py-4 rounded-lg transition-all transform hover:scale-105 inline-flex items-center justify-center w-full md:w-auto max-w-md mx-auto shadow-lg border-2 border-white animate-pulse hover:animate-none"
+          className="bg-blue-600 hover:bg-blue-500 text-white text-xl md:text-2xl font-bold px-8 py-4 rounded-lg transition-all transform hover:scale-105 inline-flex items-center justify-center w-full md:w-auto max-w-md mx-auto shadow-lg border-2 border-white"
         >
           EMPIEZA AQUÍ
           <ArrowRight className="ml-3 h-6 w-6" />
