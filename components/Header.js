@@ -1,179 +1,156 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { useState } from "react";
 import Image from "next/image";
-import ButtonSignin from "./ButtonSignin";
-import logo from "@/app/icon.png";
-import config from "@/config";
+import Link from "next/link";
+import { Phone, Menu, X } from "lucide-react";
 
-const links = [
-  {
-    href: "/#pricing",
-    label: "Pricing",
-  },
-  {
-    href: "/#testimonials",
-    label: "Reviews",
-  },
-  {
-    href: "/#faq",
-    label: "FAQ",
-  },
-];
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-const cta = <ButtonSignin extraStyle="btn-primary" />;
-
-// A header with a logo on the left, links in the center (like Pricing, etc...), and a CTA (like Get Started or Login) on the right.
-// The header is responsive, and on mobile, the links are hidden behind a burger button.
-const Header = () => {
-  const searchParams = useSearchParams();
-  const [isOpen, setIsOpen] = useState(false);
-
-  // setIsOpen(false) when the route changes (i.e: when the user clicks on a link on mobile)
-  useEffect(() => {
-    setIsOpen(false);
-  }, [searchParams]);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <header className="bg-base-200">
-      <nav
-        className="container flex items-center justify-between px-8 py-4 mx-auto"
-        aria-label="Global"
-      >
-        {/* Your logo/name on large screens */}
-        <div className="flex lg:flex-1">
-          <Link
-            className="flex items-center gap-2 shrink-0 "
-            href="/"
-            title={`${config.appName} hompage`}
-          >
-            <Image
-              src={logo}
-              alt={`${config.appName} logo`}
-              className="w-8"
-              placeholder="blur"
-              priority={true}
-              width={32}
-              height={32}
-            />
-            <span className="font-extrabold text-lg">{config.appName}</span>
-          </Link>
-        </div>
-        {/* Burger button to open menu on mobile */}
-        <div className="flex lg:hidden">
-          <button
-            type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
-            onClick={() => setIsOpen(true)}
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 text-base-content"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+    <header className="bg-gray-900 text-white sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-3">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/placeholder.svg?height=40&width=120"
+                alt="Gratech Logo"
+                width={120}
+                height={40}
+                className="h-10 w-auto"
               />
-            </svg>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            <Link href="/" className="hover:text-blue-400 transition-colors">
+              Inicio
+            </Link>
+            {/* 
+            <Link
+              href="/about"
+              className="hover:text-blue-400 transition-colors"
+            >
+              Acerca de
+            </Link>
+            <Link
+              href="/services"
+              className="hover:text-blue-400 transition-colors"
+            >
+              Servicios
+            </Link>
+            <Link
+              href="/pages"
+              className="hover:text-blue-400 transition-colors"
+            >
+              Paginas
+            </Link>
+            <Link
+              href="/blog"
+              className="hover:text-blue-400 transition-colors"
+            >
+              Contacto
+            </Link>
+            */}
+          </nav>
+
+          {/* CTA Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Link
+              href="/ASK"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
+            >
+              Preguntanos
+            </Link>
+            <Link href="/contact" className="flex items-center text-white">
+              <div className="bg-blue-600 p-2 rounded-full mr-2">
+                <Phone size={18} />
+              </div>
+              <span className="text-sm">llamanos</span>
+              <span className="text-xs block ml-1">+1-888-555-0123</span>
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-white"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-
-        {/* Your links on large screens */}
-        <div className="hidden lg:flex lg:justify-center lg:gap-12 lg:items-center">
-          {links.map((link) => (
-            <Link
-              href={link.href}
-              key={link.href}
-              className="link link-hover"
-              title={link.label}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        {/* CTA on large screens */}
-        <div className="hidden lg:flex lg:justify-end lg:flex-1">{cta}</div>
-      </nav>
-
-      {/* Mobile menu, show/hide based on menu state. */}
-      <div className={`relative z-50 ${isOpen ? "" : "hidden"}`}>
-        <div
-          className={`fixed inset-y-0 right-0 z-10 w-full px-8 py-4 overflow-y-auto bg-base-200 sm:max-w-sm sm:ring-1 sm:ring-neutral/10 transform origin-right transition ease-in-out duration-300`}
-        >
-          {/* Your logo/name on small screens */}
-          <div className="flex items-center justify-between">
-            <Link
-              className="flex items-center gap-2 shrink-0 "
-              title={`${config.appName} hompage`}
-              href="/"
-            >
-              <Image
-                src={logo}
-                alt={`${config.appName} logo`}
-                className="w-8"
-                placeholder="blur"
-                priority={true}
-                width={32}
-                height={32}
-              />
-              <span className="font-extrabold text-lg">{config.appName}</span>
-            </Link>
-            <button
-              type="button"
-              className="-m-2.5 rounded-md p-2.5"
-              onClick={() => setIsOpen(false)}
-            >
-              <span className="sr-only">Close menu</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-
-          {/* Your links on small screens */}
-          <div className="flow-root mt-6">
-            <div className="py-4">
-              <div className="flex flex-col gap-y-4 items-start">
-                {links.map((link) => (
-                  <Link
-                    href={link.href}
-                    key={link.href}
-                    className="link link-hover"
-                    title={link.label}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div className="divider"></div>
-            {/* Your CTA on small screens */}
-            <div className="flex flex-col">{cta}</div>
-          </div>
-        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-gray-800">
+          <div className="container mx-auto px-4 py-2">
+            <nav className="flex flex-col space-y-3 py-3">
+              <Link
+                href="/"
+                className="hover:text-blue-400 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Inicio
+              </Link>
+              {/* 
+              <Link
+                href="/about"
+                className="hover:text-blue-400 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Acerca de
+              </Link>
+              <Link
+                href="/services"
+                className="hover:text-blue-400 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Servicios
+              </Link>
+              <Link
+                href="/pages"
+                className="hover:text-blue-400 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Paginas
+              </Link>
+              <Link
+                href="/blog"
+                className="hover:text-blue-400 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contacto
+              </Link>
+              */}
+              <div className="flex flex-col space-y-3 pt-3 border-t border-gray-700">
+                <Link
+                  href="/ASK"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors text-center"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <div className="bg-blue-600 p-2 rounded-full mr-2">
+                    <Phone size={18} />
+                  </div>
+                  <div>
+                    <span className="text-sm">llamanos</span>
+                    <span className="text-xs block">+1-888-555-0123</span>
+                  </div>
+                </Link>
+              </div>
+            </nav>
+          </div>
+        </div>
+      )}
     </header>
   );
-};
-
-export default Header;
+}
