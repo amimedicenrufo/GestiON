@@ -9,6 +9,7 @@ import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
 import { Tooltip } from "react-tooltip";
 import config from "@/config";
+import Footer from "@/components/Footer";
 
 // Crisp customer chat support:
 // This component is separated from ClientLayout because it needs to be wrapped with <SessionProvider> to use useSession() hook
@@ -51,6 +52,7 @@ const CrispChat = () => {
 // 3. Toaster: Show Success/Error messages anywhere from the app with toast()
 // 4. Tooltip: Show tooltips if any JSX elements has these 2 attributes: data-tooltip-id="tooltip" data-tooltip-content=""
 // 5. CrispChat: Set Crisp customer chat support (see above)
+// 6. Footer: Added Footer component to all pages
 const ClientLayout = ({ children }) => {
   return (
     <>
@@ -59,7 +61,12 @@ const ClientLayout = ({ children }) => {
         <NextTopLoader color={config.colors.main} showSpinner={false} />
 
         {/* Content inside app/page.js files  */}
-        {children}
+        <div className="flex flex-col min-h-screen">
+          <div className="flex-grow">{children}</div>
+
+          {/* Footer component in all pages */}
+          <Footer />
+        </div>
 
         {/* Show Success/Error messages anywhere from the app with toast() */}
         <Toaster

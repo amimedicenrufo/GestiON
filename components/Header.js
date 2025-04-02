@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, Pencil } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,14 +18,11 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/placeholder.svg?height=40&width=120"
-                alt="Gratech Logo"
-                width={120}
-                height={40}
-                className="h-10 w-auto"
-              />
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                <Pencil size={20} className="text-white" />
+              </div>
+              <span className="font-bold text-xl">ShipeaRapido</span>
             </Link>
           </div>
 
@@ -138,12 +135,14 @@ export default function Header() {
                   className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors text-center"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <div className="bg-blue-600 p-2 rounded-full mr-2">
-                    <Phone size={18} />
-                  </div>
-                  <div>
-                    <span className="text-sm">llamanos</span>
-                    <span className="text-xs block">+1-888-555-0123</span>
+                  <div className="flex items-center justify-center">
+                    <div className="bg-blue-700 p-2 rounded-full mr-2">
+                      <Phone size={18} />
+                    </div>
+                    <div>
+                      <span className="text-sm">llamanos</span>
+                      <span className="text-xs block">+1-888-555-0123</span>
+                    </div>
                   </div>
                 </Link>
               </div>

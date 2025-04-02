@@ -217,10 +217,10 @@ export default function FAQPage() {
             <div className="flex items-center">
               <Mail className="mr-2" />
               <a
-                href="mailto:correodeejemplo@gmail.com"
+                href="mailto:correoEjemplo@gmail.com"
                 className="hover:underline"
               >
-                correodeejemplo@gmail.com
+                correoEjemplo@gmail.com
               </a>
             </div>
           </div>

@@ -49,20 +49,6 @@ export default function Hero() {
           <span className="w-2 h-2 bg-white rounded-full opacity-50"></span>
         </div>
       </div>
-
-      {/* Partners Bar */}
-      <div className="absolute bottom-0 left-0 right-0 bg-blue-600 py-4 z-10">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center md:justify-between items-center gap-8">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="flex items-center text-white">
-                <div className="w-6 h-6 mr-2 bg-white/20 rounded"></div>
-                <span className="font-medium">logotipo. {i}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </section>
   );
 }
